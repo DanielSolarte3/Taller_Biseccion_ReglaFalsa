@@ -5,12 +5,18 @@
 #include "expression.h"
 #include "reglafalsa.h"
 
+using raices::biseccion;
+using raices::reglafalsa;
 using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
-using raices::biseccion;
-using raices::reglafalsa;
+
+
+/**
+* @brief Menu de opciones
+*/
+void menu();
 
 /**
 * @brief Metodo 1.
@@ -27,18 +33,68 @@ void metodo_biseccion(string str_f);
 void metodo_reglaFalsa(string str_f);
 
 int main () {
-	//Funcion 1 biseccion
-	metodo_biseccion("x^2 - cos(x)");
-	printf("===============================================================================================\n");
-	//Funcion 2 biseccion
-	metodo_biseccion("x^3 + 4*(x^2) - 10");
-	printf("===============================================================================================\n");
-	//Funcion 1 regla Falsa
-	metodo_reglaFalsa("x^2 - cos(x)");
-	printf("===============================================================================================\n");
-	//Funcion 2 regla Falsa
-	metodo_reglaFalsa("x^3 + 4*(x^2) - 10");
+	menu();
 	return 0;
+}
+
+void menu(){
+	int metodo /*!< Opcion menu de metodos*/;
+	int funcion; /*!< Opcion menu de funciones*/
+	string str_f1 = "x^2 - cos(x)";
+	string str_f2 = "x^3 + 4*(x^2)-10";
+	
+	do{
+		cout << "\n==============================================================\n" << endl;
+		cout << "1. Metodo de Biseccion " << endl;
+		cout << "2. Regla Falsa" << endl;
+		cout << "3. Salir" << endl;
+		cout << "Ingrese una opcion: ";
+		cin >> metodo;
+		
+		switch(metodo){
+		case 1:
+			cout << "Seleccione la funcion a evaluar: " << endl;
+			cout << "1. " << str_f1 << endl;
+			cout << "2. " << str_f2 << endl;
+			cout << "Ingrese una opcion: ";
+			cin >> funcion;
+			switch(funcion){
+			case 1:
+				metodo_biseccion(str_f1);
+				break;
+			case 2:
+				metodo_biseccion(str_f2);
+				break;
+			}			
+			break;
+			
+		case 2:
+			cout << "Seleccione la funcion a evaluar: " << endl;
+			cout << "1. " << str_f1 << endl;
+			cout << "2. " << str_f2 << endl;
+			cout << "Ingrese una opcion: ";
+			cin >> funcion;
+			switch(funcion){
+			case 1:
+				metodo_reglaFalsa(str_f1);
+				break;
+			case 2:
+				metodo_reglaFalsa(str_f2);
+				break;
+			}			
+			break;
+			
+		case 3: 
+			
+			cout << "Saliendo..." << endl;
+			exit(0);	
+			break;
+			
+		default:
+			cout << "Opcion invalida" << endl;
+		}
+		
+	}while(metodo != 4);
 }
 
 void metodo_biseccion(string str_f) {
@@ -91,3 +147,4 @@ void metodo_reglaFalsa(string str_f) {
 	sol.imprimir();
 	
 }
+
